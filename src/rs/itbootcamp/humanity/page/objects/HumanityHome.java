@@ -3,6 +3,8 @@ package rs.itbootcamp.humanity.page.objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class HumanityHome {
 	public static final String URL = "https://www.humanity.com";
@@ -111,5 +113,18 @@ public class HumanityHome {
 
 	public static void clickLogin2(WebDriver driver) {
 		getLogin2(driver).click();
+	}
+	
+	public static void displayHome() {
+		System.setProperty("webdriver.chrome.driver", "chromedriver (2).exe");
+		WebDriver driver = new ChromeDriver();
+		Actions acs = new Actions(driver);
+		
+		HumanityHome.clickLogin(driver);
+		HumanityHome.clickLoginEmail(driver);
+		HumanityHome.inputLoginEmail(driver, "nifibew@free-temp.net");
+		HumanityHome.clickPassword(driver);
+		HumanityHome.inputPassword(driver, "lozinka");
+		HumanityHome.clickLogin2(driver);
 	}
 }

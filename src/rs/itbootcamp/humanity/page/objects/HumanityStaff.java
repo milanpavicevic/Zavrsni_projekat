@@ -1,10 +1,12 @@
 package rs.itbootcamp.humanity.page.objects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HumanityStaff {
+	public static final String URL_STAFF = "https://companero.humanity.com/app/staff/list/load/true/";
 	private static final String ADD_STAFF_XPATH = "//button[@id='act_primary']";
 	private static final String FIRST_NAME_XPATH = "//input[@id='_asf";
 	private static final String LAST_NAME_XPATH = "//input[@id='_asl";
@@ -65,5 +67,10 @@ public class HumanityStaff {
 
 	public static void clickSearch(WebDriver driver) {
 		getSearch(driver).click();
+	}
+	
+	public static void inputSearch(WebDriver driver, String data) {
+		getSearch(driver).sendKeys(data);
+		getSearch(driver).sendKeys(Keys.ENTER);
 	}
 }
