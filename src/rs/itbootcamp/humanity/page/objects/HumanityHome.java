@@ -1,9 +1,13 @@
 package rs.itbootcamp.humanity.page.objects;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 public class HumanityHome {
@@ -115,16 +119,39 @@ public class HumanityHome {
 		getLogin2(driver).click();
 	}
 	
-	public static void displayHome() {
+	public static void displayHome() throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver", "chromedriver (2).exe");
 		WebDriver driver = new ChromeDriver();
-		Actions acs = new Actions(driver);
 		
+//		System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
+//		WebDriver driver = new FirefoxDriver();
+//		
+		Actions acs = new Actions(driver);
+		driver.get(HumanityHome.URL);
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		HumanityHome.clickLogin(driver);
 		HumanityHome.clickLoginEmail(driver);
 		HumanityHome.inputLoginEmail(driver, "nifibew@free-temp.net");
 		HumanityHome.clickPassword(driver);
 		HumanityHome.inputPassword(driver, "lozinka");
 		HumanityHome.clickLogin2(driver);
+
+		HumanityMenu.clickShiftPl(driver);
+		HumanityMenu.clickTimeClock(driver);
+		HumanityMenu.clickLeave(driver);
+		HumanityMenu.clickTraining(driver);
+		HumanityMenu.clickPayroll(driver);
+		HumanityMenu.clickReports(driver);
+
+		HumanityMenu.clickStaffButton(driver);
+		HumanityStaff.clickSearch(driver);
+		HumanityStaff.inputSearch(driver, "Djokovic");
+//		HumanityStaff.clickAddStaffButton(driver);
+		
+		Action a = acs.build();
+		a.perform();
+		Thread.sleep(3000);
+		driver.quit();
 	}
 }

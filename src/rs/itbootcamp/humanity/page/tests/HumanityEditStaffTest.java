@@ -27,7 +27,8 @@ public class HumanityEditStaffTest {
 			HumanityHome.clickLogin2(driver);
 			HumanityMenu.clickStaffButton(driver);
 
-			HumanityEditStaff.clickFirstEmpl(driver);
+			Thread.sleep(3000);
+			HumanityEditStaff.clickThirdEmpl(driver);
 			HumanityEditStaff.clickEditDetails(driver);
 			HumanityEditStaff.clickEditNick(driver, "The Professor");
 			HumanityEditStaff.clickUploadPic(driver);

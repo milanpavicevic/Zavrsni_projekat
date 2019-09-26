@@ -14,6 +14,10 @@ public class HumanityStaff {
 	private static final String ENDING_XPATH = "']";
 	private static final String SAVE_EMPL_XPATH = "//button[@id='_as_save_multiple']";
 	private static final String SEARCH_XPATH = "//input[@id='EmployeeStaffFilter']";
+	private static final String NOT_ACTIVATED_XPATH = "//a[contains(text(),'Not Activated')]";
+
+	// td[contains(text(),'boban5@gmail.com')]
+	// td[contains(text(),'mooo5@gmail.com')]
 
 	// Add staff button:
 	public static WebElement getAddStaffButton(WebDriver driver) {
@@ -68,9 +72,18 @@ public class HumanityStaff {
 	public static void clickSearch(WebDriver driver) {
 		getSearch(driver).click();
 	}
-	
+
 	public static void inputSearch(WebDriver driver, String data) {
 		getSearch(driver).sendKeys(data);
 		getSearch(driver).sendKeys(Keys.ENTER);
+	}
+
+	// Not Activated button:
+	public static WebElement getNotActivated(WebDriver driver) {
+		return driver.findElement(By.xpath(NOT_ACTIVATED_XPATH));
+	}
+
+	public static void clickNotActivated(WebDriver driver) {
+		getNotActivated(driver).click();
 	}
 }

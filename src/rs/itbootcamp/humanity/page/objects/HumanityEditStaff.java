@@ -12,12 +12,12 @@ public class HumanityEditStaff {
 	private static final String SAVE_EMPL_XPATH = "//button[@id='act_primary']";
 
 	// First employee:
-	public static WebElement getFirstEmpl(WebDriver driver) {
+	public static WebElement getThirdEmpl(WebDriver driver) {
 		return driver.findElement(By.xpath(FIRST_EMPLOYEE_XPATH));
 	}
 
-	public static void clickFirstEmpl(WebDriver driver) {
-		getFirstEmpl(driver).click();
+	public static void clickThirdEmpl(WebDriver driver) {
+		getThirdEmpl(driver).click();
 	}
 
 	// Edit details:

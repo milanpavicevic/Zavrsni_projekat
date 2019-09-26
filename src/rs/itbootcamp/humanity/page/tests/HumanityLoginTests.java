@@ -26,7 +26,7 @@ public class HumanityLoginTests {
 				System.out.println("Uspesan login!");
 			} else
 				System.out.println("Login je neuspesan.");
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			driver.quit();
 		} catch (Exception e) {
 			System.out.println(e.toString());
