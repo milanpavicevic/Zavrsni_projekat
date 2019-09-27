@@ -12,12 +12,12 @@ public class HumanityEditStaff {
 	private static final String SAVE_EMPL_XPATH = "//button[@id='act_primary']";
 
 	// First employee:
-	public static WebElement getThirdEmpl(WebDriver driver) {
+	public static WebElement getFirstEmpl(WebDriver driver) {
 		return driver.findElement(By.xpath(FIRST_EMPLOYEE_XPATH));
 	}
 
-	public static void clickThirdEmpl(WebDriver driver) {
-		getThirdEmpl(driver).click();
+	public static void clickFirstEmpl(WebDriver driver) {
+		getFirstEmpl(driver).click();
 	}
 
 	// Edit details:
@@ -35,7 +35,6 @@ public class HumanityEditStaff {
 	}
 
 	public static void clickUploadPic(WebDriver driver) {
-//		getUploadPic(driver).click();
 		getUploadPic(driver).sendKeys("D:\\IT\\QA - IT Bootcamp\\automation\\Humanity\\bobicic.jpg");
 	}
 

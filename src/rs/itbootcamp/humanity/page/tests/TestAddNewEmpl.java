@@ -1,4 +1,5 @@
 package rs.itbootcamp.humanity.page.tests;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.concurrent.TimeUnit;
@@ -6,8 +7,13 @@ import java.util.concurrent.TimeUnit;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -17,7 +23,6 @@ import rs.itbootcamp.humanity.page.objects.HumanityStaff;
 import rs.itbootcamp.humanity.utility.ExcelUtils;
 
 public class TestAddNewEmpl {
-
 	@Test
 	public static void testAddNewEmpl() {
 
@@ -27,6 +32,7 @@ public class TestAddNewEmpl {
 			driver.get(HumanityHome.URL);
 			driver.manage().window().maximize();
 			driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+			Actions acs = new Actions(driver);
 
 			HumanityHome.clickLogin(driver);
 			HumanityHome.clickLoginEmail(driver);
@@ -34,6 +40,7 @@ public class TestAddNewEmpl {
 			HumanityHome.clickPassword(driver);
 			HumanityHome.inputPassword(driver, "lozinka");
 			HumanityHome.clickLogin2(driver);
+			Thread.sleep(3000);
 			HumanityMenu.clickStaffButton(driver);
 			Thread.sleep(3000);
 			HumanityStaff.clickAddStaffButton(driver);
@@ -43,13 +50,10 @@ public class TestAddNewEmpl {
 			HSSFWorkbook wbe = new HSSFWorkbook(fis);
 			HSSFSheet sheet1 = wbe.getSheetAt(1);
 			int rowcount = sheet1.getLastRowNum();
-			StringBuilder sb = new StringBuilder();
-			sb.append("Ukupan broj zaposlenih je ");
-			sb.append(rowcount + 1);
-			sb.append(" + menadzer.");
-			System.out.println(sb);
-			for (int i = 1; i <= 4 /* rowcount*/; i++) {
-				HSSFRow r = sheet1.getRow(i);
+			Thread.sleep(3000);
+//for je ogranicen na 1 da bih izbegao cesta brisanja zaposlenih, zbog gomilanja prilikom testiranja
+			for (int i = 1; i <= 1 /*rowcount*/; i++) {
+				HSSFRow r = sheet1.getRow((int) Math.ceil(Math.random()*9));
 				if (r != null) {
 					String ime = r.getCell(0).getStringCellValue();
 					String prezime = r.getCell(1).getStringCellValue();
@@ -64,27 +68,24 @@ public class TestAddNewEmpl {
 					System.out.println("<Prazan red>" + i);
 				}
 			}
+			Thread.sleep(3000);
 			HumanityStaff.clickSaveEmplButton(driver);
-			Thread.sleep(2000);
-			HumanityStaff.clickNotActivated(driver);
-			for (int i = 1; i <= 4 /*rowcount*/; i++) {
-				SoftAssert sa = new SoftAssert();
-//				sa.assertEquals(HumanityStaff.getFirstNameField(driver, i).getText(), ExcelUtils.getDataAt(i, 0),
-//						"U redu " + i + " je pogresan unos u polju za ime.");
-//				sa.assertEquals(HumanityStaff.getLastNameField(driver, i).getText(), ExcelUtils.getDataAt(i, 1),
-//						"U redu " + i + " je pogresan unos u polju za prezime.");
-				sa.assertEquals(HumanityStaff.getEmailField(driver, i).getText(), ExcelUtils.getDataAt(i, 2),
-						"U redu " + i + " je pogresan unos u polju za mejl.");
-				//boolean, boolean, string!
-				sa.assertAll("Pala je neka provera.");
-			}
+			Thread.sleep(3000);
+			WebElement emplNo = HumanityStaff.getEmplNumber(driver);
+			String brojZap = emplNo.findElement(By.tagName("span")).getText();
+			StringBuilder sb = new StringBuilder();
+			sb.append("Ukupan broj zaposlenih je ");
+			sb.append(brojZap);
+			sb.append(" + menadzer.");
+			System.out.println(sb);
+			
 			wbe.close();
-
+			Action a = acs.build();
+			a.perform();
 			Thread.sleep(5000);
 			driver.quit();
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-//		System.out.println(ExcelUtils.getDataAt(0, 0));
 	}
 }

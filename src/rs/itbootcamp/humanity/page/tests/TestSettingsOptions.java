@@ -20,7 +20,6 @@ public class TestSettingsOptions {
 //		System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
 //		WebDriver driver = new FirefoxDriver();
 //		
-		Actions acs = new Actions(driver);
 		driver.get(HumanityHome.URL);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -36,8 +35,6 @@ public class TestSettingsOptions {
 		HumanitySettings.inputLanguage(driver, "Serbian (machine)");
 		HumanitySettings.inputTimeFormat(driver, "24 hour");
 
-		Action a = acs.build();
-		a.perform();
 		Thread.sleep(3000);
 		driver.quit();
 	}

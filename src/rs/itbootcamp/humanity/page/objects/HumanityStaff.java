@@ -1,5 +1,7 @@
 package rs.itbootcamp.humanity.page.objects;
 
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -15,9 +17,8 @@ public class HumanityStaff {
 	private static final String SAVE_EMPL_XPATH = "//button[@id='_as_save_multiple']";
 	private static final String SEARCH_XPATH = "//input[@id='EmployeeStaffFilter']";
 	private static final String NOT_ACTIVATED_XPATH = "//a[contains(text(),'Not Activated')]";
-
-	// td[contains(text(),'boban5@gmail.com')]
-	// td[contains(text(),'mooo5@gmail.com')]
+	private static final String EMPL_NUMBER_XPATH = "//a[contains(text(),'Not Activated')]";
+	private static int random = (int) Math.floor(Math.random() * 99);
 
 	// Add staff button:
 	public static WebElement getAddStaffButton(WebDriver driver) {
@@ -52,7 +53,7 @@ public class HumanityStaff {
 	}
 
 	public static void setEmailField(WebDriver driver, int i, String email) {
-		getEmailField(driver, i).sendKeys(email);
+		getEmailField(driver, i).sendKeys(random + email);
 	}
 
 	// Click save employees button:
@@ -85,5 +86,10 @@ public class HumanityStaff {
 
 	public static void clickNotActivated(WebDriver driver) {
 		getNotActivated(driver).click();
+	}
+
+	// Not Activated button:
+	public static WebElement getEmplNumber(WebDriver driver) {
+		return driver.findElement(By.xpath(EMPL_NUMBER_XPATH));
 	}
 }
